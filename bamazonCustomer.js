@@ -53,6 +53,19 @@ let changingTableData = (productID, productQuantity) => {
       ) {
         console.log("Insufficient quantity.");
         setTimeout(start, 3000);
+      } else {
+        connection.query(
+          "UPDATE products SET stock_quantity = " +
+            (results[0].stock_quantity - productQuantity) +
+            " WHERE id = " +
+            results[0].id,
+          (errNested, resultsNested) => {
+            if (errNested) throw errNested;
+
+            console.log("Product has been purchased and updated");
+            setTimeout(start, 3000);
+          }
+        );
       }
     }
   );
