@@ -1,7 +1,7 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 
-let start = () => {
+const start = () => {
   connection.query("SELECT * FROM products", (err, results) => {
     if (err) throw err;
 
@@ -18,7 +18,7 @@ let start = () => {
   });
 };
 
-let purchasing = () => {
+const purchasing = () => {
   inquirer
     .prompt([
       {
@@ -38,7 +38,7 @@ let purchasing = () => {
     });
 };
 
-let changingTableData = (productID, productQuantity) => {
+const changingTableData = (productID, productQuantity) => {
   connection.query(
     "SELECT * FROM products WHERE id = " + productID,
     (err, results) => {
@@ -71,7 +71,7 @@ let changingTableData = (productID, productQuantity) => {
   );
 };
 
-let connection = mysql.createConnection({
+const connection = mysql.createConnection({
   host: "localhost",
 
   port: 3306,
