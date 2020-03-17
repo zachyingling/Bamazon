@@ -131,7 +131,58 @@ const addInventory = () => {
   });
 };
 
-const addProduct = () => {};
+const addProduct = () => {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "What is the new products name?"
+      },
+      {
+        type: "input",
+        name: "department",
+        message: "What the department for the product you want to add?"
+      },
+      {
+        type: "number",
+        name: "price",
+        message: "What is the price of the product that you want to add?"
+      },
+      {
+        type: "number",
+        name: "stock",
+        message:
+          "What is the current stock of the product that you would like to add?"
+      }
+    ])
+    .then(answers => {
+      if (isNaN(answers.price)) {
+        console.log("The price you inputted wasn't a number.");
+        return exitFunction();
+      } else if (isNaN(answers.stock)) {
+        console.log("The stock quantity that you inputted wasn't a number.");
+        return exitFunction();
+      } else {
+        connection.query(
+          "INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES ('" +
+            answers.name +
+            "', '" +
+            answers.department +
+            "', " +
+            answers.price +
+            ", " +
+            answers.stock +
+            ");",
+          (err, results) => {
+            if (err) throw err;
+            console.log("Product has been successfully added.");
+            return exitFunction();
+          }
+        );
+      }
+    });
+};
 
 const exitFunction = () => {
   inquirer
