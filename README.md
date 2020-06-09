@@ -4,7 +4,7 @@
 
 ### Description
 
-This is a CLI application using a mySQL database containing a table with 5 columns (id, product_name, product_department, product_price, product_stock). The database is using localhost on port 3306 with the username "root" and password "password".
+This is a CLI application using a mySQL database containing a table with 5 columns (id, product_name, product_department, product_price, product_stock).
 
 ### Technologies Used
 
